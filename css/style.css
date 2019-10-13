@@ -1,0 +1,105 @@
+body {
+	background-image: url("../image/denim.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.wrap {
+	width: 90%;
+	margin: 0 auto;
+	animation-name:fade-in;
+	animation-duration:1s;
+	animation-timing-function: ease-out;
+	animation-delay:0s;
+	animation-iteration-count:1;
+	animation-direction:normal;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+	0% {opacity: 0}
+	100% {opacity: 1}
+}
+
+header, footer {
+	color: navy;
+	height: 70px;
+	line-height: 70px;
+	background-color: rgba(255, 255, 255, 0.7);
+	margin: 20px 0;
+}
+
+.login_title {
+	font-size: 25px;
+	display: inline-block;
+}
+
+.login_title_icon {
+	font-size: 30px;
+	padding: 8px;
+	color: red;
+}
+
+.content {
+	color: navy;
+	background-color: rgba(255, 255, 255, 0.7);
+	font-size: 20px;
+	margin: 20px;
+	padding: 20px;
+	height: 600px;
+	overflow: scroll;
+}
+
+dl {
+	margin: 20px 0 0;
+}
+
+dt {
+	border-left: 5px solid #ff0000;
+	padding-left: 5px;
+	margin-bottom: 5px;
+}
+
+dd {
+	padding-bottom: 10px;
+}
+
+.bbsText {
+	font-size: 20px;
+}
+
+.paging {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.paging li {
+	display: inline;
+	list-style: none;
+}
+
+.error {
+	font-size: 90%;
+	color: #BB1850;
+}
+
+.msg {
+	clear: both;
+	border-top: 1px solid red;
+	padding: 20px 0;
+}
+
+.msg img {
+	float: left;
+	margin-right: 5px;
+}
+
+.msg p {
+	margin: 0;
+}
+
+.msg .day,
+.msg .day a {
+	font-size: 80%;
+	color: black;
+}
