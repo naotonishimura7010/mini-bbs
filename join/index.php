@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('../dbconnect.php');
-// 必要事項の入力有無をチェック
+// 項目の入力有無をチェック
 if (!empty($_POST)) {
 		if ($_POST['name'] === '') {
 				$error['name'] = 'blank';
@@ -35,14 +35,17 @@ if (!empty($_POST)) {
 				}
 		}
 		
+		// 上記全てにエラーが無い場合の処理
 		if (empty($error)) {
 				// アップロードした画像にファイル名を付加する処理
 				$image = date('YmdHis') . $_FILES['image']['name'];
 				// ファイルをmember_pictureに保存する処理
 				move_uploaded_file($_FILES['image']['tmp_name'],
 				'../member_picture/' . $image);
+				// check.phpに値を参照させるための処理
 				$_SESSION['join'] = $_POST;
 				$_SESSION['join']['image'] = $image;
+				// check.phpにジャンプする処理
 				header('Location: check.php');
 				exit();
 		}
