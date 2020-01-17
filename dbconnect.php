@@ -1,7 +1,6 @@
 <?php
-// 例外処理
+// DBに接続する共通プログラム
 try {
-  // PDO⇨PHPをDBにアクセスする為の処理
   $db = new PDO('mysql:dbname=mini_bbs;host=localhost:8889;
   charset=utf8', 'root', 'root');
 } catch(PDOExeption $e) {
