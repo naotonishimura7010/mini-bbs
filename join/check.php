@@ -1,8 +1,9 @@
 <?php
 session_start();
+// DBに接続する共通プログラムの参照
 require('../dbconnect.php');
 
-// 不正にcheck.phpが呼び出された場合index.phpに強制移動させる処理
+// 不正にcheck.phpが呼び出された場合index.phpに強制移動させる処理
 if (!isset($_SESSION['join'])) {
 		header('Location: index.php');
 		exit();
