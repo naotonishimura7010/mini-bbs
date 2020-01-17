@@ -1,5 +1,6 @@
 <?php
 session_start();
+// DBに接続する共通プログラムの参照
 require('dbconnect.php');
 
 if ($_COOKIE['email'] !== '') {
