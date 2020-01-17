@@ -11,16 +11,19 @@ if (!empty($_POST)) {
   $email = $_POST['email'];
   
   if($_POST['email'] !== '' && $_POST['password'] !== '') {
+    // DBのデータと照会
     $login = $db->prepare('SELECT * FROM members WHERE email=?
     AND password=?');
     $login->execute(array(
       $_POST['email'],
+      // 暗号化されたパスワードの参照
       sha1($_POST['password'])
     ));
     $member = $login->fetch();
     
-    // セッションの保存
+    // ログインに成功した場合の処理
     if($member) {
+      // セッションの保存
       $_SESSION['id'] = $member['id'];
       $_SESSION['time'] = time();
 
@@ -31,6 +34,7 @@ if (!empty($_POST)) {
 
       header('Location: index.php');
       exit();
+    //ログインに失敗した場合の処理
     } else {
       $error['login'] = 'failed';
     }
