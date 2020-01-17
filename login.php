@@ -6,7 +6,6 @@ require('dbconnect.php');
 if ($_COOKIE['email'] !== '') {
   $email = $_COOKIE['email'];
 }
-
 if (!empty($_POST)) {
   $email = $_POST['email'];
   
@@ -27,11 +26,11 @@ if (!empty($_POST)) {
       $_SESSION['id'] = $member['id'];
       $_SESSION['time'] = time();
 
-    // Cookieの保存
+    // 次回から自動的にログインする場合の処理
     if ($_POST['save'] === 'on') {
       setcookie('email', $_POST['email'], time()+60*60*24*14);
     }
-
+      //index.phpにアクセスする処理
       header('Location: index.php');
       exit();
     //ログインに失敗した場合の処理
