@@ -2,12 +2,14 @@
 session_start();
 require('dbconnect.php');
 
-  // セッション機能
+  // セッションを用いたログインの確認処理
   if(isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    // ログイン時の処理
     $_SESSION['time'] = time();
     $members = $db->prepare('SELECT * FROM members WHERE id=?');
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
+  // ログインしていない場合login.phpにジャンプ
   } else {
     header('Location: login.php');
     exit();
@@ -23,6 +25,7 @@ require('dbconnect.php');
         $_POST['message'],
         $_POST['reply_post_id']
       ));
+      // メッセージを重複して送信させない為index.phpにジャンプ
       header('Location: index.php');
       exit();
     }
@@ -53,6 +56,7 @@ require('dbconnect.php');
     AND p.id=?');
     $response->execute(array($_REQUEST['res']));
     $table = $response->fetch();
+    // 指定されたidのメッセージを変数に格納
     $message = '@' . $table['name'] . ' ' . $table
     ['message'];
   }
@@ -78,7 +82,10 @@ require('dbconnect.php');
           <dl>
             <dt><?php print(htmlspecialchars($member['name'], ENT_QUOTES)); ?>さん、メッセージをどうぞ</dt>
             <dd>
-              <textarea class="bbsText" name="message" cols="50" rows="3"><?php print(htmlspecialchars($message, ENT_QUOTES)); ?></textarea>
+              <textarea class="bbsText" name="message" cols="50" rows="3">
+                <!-- テキストエリアに値を出力する処理 -->
+                <?php print(htmlspecialchars($message, ENT_QUOTES)); ?>
+              </textarea>
               <input type="hidden" name="reply_post_id" value="<?php print(htmlspecialchars($_REQUEST['res'], ENT_QUOTES)); ?>" />
             </dd>
           </dl>
@@ -89,6 +96,7 @@ require('dbconnect.php');
           </div>
         </form>
         <br>
+        
         <!-- メッセージ一覧の表示処理 -->
         <?php foreach ($posts as $post): ?>
           <div class="msg">
@@ -112,6 +120,7 @@ require('dbconnect.php');
             </p>
           </div>
         <?php endforeach; ?>
+        
         <ul class="paging">
           <?php if($page > 1): ?>
             <li><a href="index.php?page=<?php print($page-1); ?>">←前のページへ</a></li>
